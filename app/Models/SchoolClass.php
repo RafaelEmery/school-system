@@ -22,4 +22,16 @@ class SchoolClass extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function getRightTypeAttribute()
+    {
+        switch ($this->type) {
+            case 'ensino_infantil':
+                return 'Ensino Infantil';
+            case 'ensino_fundamental':
+                return 'Ensino Fundamental';
+            case 'ensino_medio':
+                return 'Ensino Médio';
+        }
+    }
 }
