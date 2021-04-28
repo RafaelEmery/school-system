@@ -10,7 +10,7 @@ class SchoolClass extends Model
     use HasFactory;
 
     protected $fillable = [
-        'grade', 'type', 'active'
+        'name', 'start_date', 'end_date'
     ];
 
     public function teacher()
@@ -21,17 +21,5 @@ class SchoolClass extends Model
     public function students()
     {
         return $this->hasMany(Student::class);
-    }
-
-    public function getRightTypeAttribute()
-    {
-        switch ($this->type) {
-            case 'ensino_infantil':
-                return 'Ensino Infantil';
-            case 'ensino_fundamental':
-                return 'Ensino Fundamental';
-            case 'ensino_medio':
-                return 'Ensino Médio';
-        }
     }
 }

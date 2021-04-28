@@ -10,16 +10,11 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone', 'address', 'school_class_id'
+        'name', 'enrollment_number', 'document_type', 'document', 'birthday_date', 'school_class_id'
     ];
 
     public function class()
     {
         return $this->belongsTo(SchoolClass::class);
-    }
-
-    public function getFullNameAttribute()
-    {
-        return $this->first_name . ' ' . $this->last_name;
     }
 }

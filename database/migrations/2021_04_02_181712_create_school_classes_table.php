@@ -15,9 +15,9 @@ class CreateSchoolClassesTable extends Migration
     {
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
-            $table->string('grade');
-            $table->enum('type', ['ensino_infantil', 'ensino_fundamental', 'ensino_medio']);
-            $table->boolean('active')->default(1);
+            $table->string('name');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
