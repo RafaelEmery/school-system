@@ -8,19 +8,19 @@
 - [ ] Unit or feature tests for main entities 
 
 ## Views to show
-- [] All school classes
-- [] School classes with all students related
-- [] Student details tests
+- [ ] All school classes
+- [ ] School classes with all students related
+- [ ] Student details tests
 
 ## Attributes:
-- [] Classes: name, start date and end date
-- [] Student: name, enrollment, document_type, document, birthday_date
-- [] Teacher: name, document_type, document, birthday_date, highest_degree
-- [] Tests: name
-- [] Subject: name
+- [ ] Classes: name, start date and end date
+- [ ] Student: name, enrollment, document_type, document, birthday_date
+- [ ] Teacher: name, document_type, document, birthday_date, highest_degree
+- [ ] Tests: name
+- [ ] Subject: name
 
 ## Test the tests
-- [] CRUD of classes
+- [ ] CRUD of classes
 
 
 
