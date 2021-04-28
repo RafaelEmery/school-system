@@ -14,7 +14,7 @@ class SchoolClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = SchoolClass::all();
     }
 
     /**

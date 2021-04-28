@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\SchoolClassController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/classes', [SchoolClassController::class]);
+Route::resource('/classes', 'App\Http\Controllers\SchoolClassController');
