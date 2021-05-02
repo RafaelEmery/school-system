@@ -20,8 +20,8 @@
       <div class="card">
         <div class="card-header">
           <div class="w-100 d-flex justify-content-between align-itens-center">
-            <h3 class="card-title align-middle">Listagem das turmas</h3>
-            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Cadastrar nova Turma</button>
+            <h3 class="card-title align-middle">Listagem de Alunos</h3>
+            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Cadastrar novo Aluno</button>
           </div>
         </div>
         <!-- /.card-header -->
@@ -29,18 +29,20 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th>Matricula</th>
                 <th>Nome</th>
-                <th>Data de Início</th>
-                <th>Data de Fim</th>
+                <th>Data de Nascimento</th>
+                <th>Turma</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($classes as $class)
+              @foreach ($students as $student)
                   <tr>
-                    <td>{{$class->name}}</td>
-                    <td>{{$class->start_date}}</td>
-                    <td>{{$class->end_date}}</td>
+                    <td>{{$student->enrollment_number}}</td>
+                    <td>{{$student->name}}</td>
+                    <td>{{ \Carbon\Carbon::parse($student->birthday_date)->format('d/m/Y')}}</td>
+                    <td>{{App\Models\SchoolClass::find($student->school_class_id) -> name}}</td>
                     <td>
                       <button class="btn btn-info">Informações</button>
                       <button class="btn btn-warning">Editar</button>
@@ -62,39 +64,54 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Novo Aluno</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('classes.store')}}" id="form-create" method="POST">
+        <form action="{{route('aluno.store')}}" id="form-create" method="POST">
           @csrf
           <div class="w-100 d-flex flex-column align-itens-center">
             <div class="form-group">
               <label for="">Nome</label>
               <input class="form-control" type="text" name="name" id="">
             </div>
-            <div class="form-group">
-              <label for="">Data de Início</label>
-              <input class="form-control" type="date" name="start_date" id="">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Tipo de Documento</label>
+                  <select class="form-control" name="document_type">
+                    <option value="1">RG</option>
+                    <option value="2">CPF</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="display: none">
+              <label for="">Matricula</label>
+              <input class="form-control" type="text" value="987655443" name="enrollment_number" id="">
             </div>
             <div class="form-group">
-              <label for="">Data de Fim</label>
-              <input class="form-control" type="date" name="end_date" id="">
+              <label for="">Documento</label>
+              <input class="form-control" type="text" name="document" id="">
             </div>
-            <label for="">Professores</label>
-            <select class="" name="teachers[]" id="teacher-select" multiple="multiple">
-              @foreach ($teachers as $teacher)
-                <option value="{{$teacher->id}}">{{$teacher->name}}</option>
-              @endforeach
-            </select>
-            <label class="mt-3" for="">Alunos</label>
-            <select class="" name="students[]" id="student-select" multiple="multiple">
-              @foreach ($students as $student)
-                <option value="{{$student->id}}">{{$student->name}}</option>
-              @endforeach
-            </select>
+            <div class="form-group">
+              <label for="">Data de Nascimento</label>
+              <input class="form-control" type="date" name="birthday_date" id="">
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Classe</label>
+                  <select class="form-control" name="school_class_id">
+                    @foreach ($classes as $class)
+                      <option value="{{$class->id}}">{{$class->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -123,29 +140,9 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
 <script>
   $(document).ready(function() {
-    $('#teacher-select').select2();
-    $('#student-select').select2();
+    $('#classes-select').select2();
+    $('#document-select').select2();
   });
-
-  // $(function () {
-  //   $("#jsGrid1").jsGrid({
-  //       height: "100%",
-  //       width: "100%",
-
-  //       sorting: true,
-  //       paging: true,
-
-  //       data: db.clients,
-
-  //       fields: [
-  //           { name: "Código", type: "number", width: 30 },
-  //           { name: "Nome", itemTemplate: function(value) {
-  //                           return $("<a>").attr("href", value).text(value);
-  //                       }, width: 150 },
-  //           { name: "Data de Inicio", type: "number", width: 70 },
-  //           { name: "Data de Termino", type: "number", width: 70 },
-  //       ]
-  //   });
-  // });
+  
 </script>
 @endsection

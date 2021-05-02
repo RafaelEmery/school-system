@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +18,14 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/aluno', function () {
-    return view('student.detalhes');
-})->name('aluno');
+// Route::get('/aluno')->uses([StudentController::class, 'index'])->name('aluno');
 
 Route::get('/turma')->uses([SchoolClassController::class, 'index'])->name('turma');
 
-Route::get('/turma/detalhes', function () {
-    return view('turmas.detalhes');
-})->name('turma/detalhes');
-
 Route::resource('/classes', 'App\Http\Controllers\SchoolClassController');
+
+Route::resource('/aluno', 'App\Http\Controllers\StudentController');
+
+Route::resource('/disciplina', 'App\Http\Controllers\SubjectController');
+
+Route::resource('/professor', 'App\Http\Controllers\TeacherController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\SchoolClass;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,7 +15,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        $classes = SchoolClass::all();
+
+        return view('student.listar', compact('students', 'classes'));
     }
 
     /**
@@ -35,7 +39,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+        unset($dados['classes']);
+        
+        $aluno = Student::create($dados);
+        $aluno->refresh();
+
+        return redirect()->route('aluno.index');
     }
 
     /**
