@@ -22,7 +22,12 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'enrollment_number' => $this->faker->unique()->randomNumber(9, true),
+            'document_type' => $this->faker->numberBetween(1,2),
+            'document' => $this->faker->unique()->randomNumber(9, true),
+            'birthday_date' => $this->faker->dateTimeBetween('-18 years', '-13 years', null),
+            'school_class_id' => $this->faker->numberBetween(1,5),
         ];
     }
 }

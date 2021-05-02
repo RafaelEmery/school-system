@@ -22,7 +22,9 @@ class SchoolClassFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->numerify('Turma ##'),
+            'start_date' => $this->faker->dateTimeBetween('-1 years', 'now', null),
+            'end_date' => $this->faker->dateTimeBetween('now', '+1 years', null),
         ];
     }
 }

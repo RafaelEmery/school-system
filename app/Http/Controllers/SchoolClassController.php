@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolClass;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class SchoolClassController extends Controller
@@ -15,6 +17,10 @@ class SchoolClassController extends Controller
     public function index()
     {
         $classes = SchoolClass::all();
+        $teachers = Teacher::all();
+        $students = Student::all();
+
+        return view('turmas.listar', compact('classes', 'teachers', 'students'));
     }
 
     /**
@@ -35,7 +41,26 @@ class SchoolClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+        unset($dados['teachers']);
+        unset($dados['students']);
+
+        $turma = SchoolClass::create($dados);
+        $turma->refresh();
+
+        foreach ($request->teachers as $teacherId) {
+            $teacher = Teacher::find($teacherId);
+            $teacher->school_class_id = $turma->id;
+            $teacher->save();
+        }
+
+        foreach ($request->students as $studentId) {
+            $student = Student::find($studentId);
+            $student->school_class_id = $turma->id;
+            $student->save();
+        }
+
+        return redirect()->route('classes.index');
     }
 
     /**

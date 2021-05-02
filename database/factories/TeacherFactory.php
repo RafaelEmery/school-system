@@ -22,7 +22,12 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'document_type' => $this->faker->numberBetween(1,2),
+            'document' => $this->faker->unique()->randomNumber(9, true),
+            'birthday_date' => $this->faker->dateTimeBetween('-70 years', '-22 years', null),
+            'highest_degree' => $this->faker->randomElements(['Ensino Médio', 'Ensino Técnico', 'Ensino Superior', 'Especialização', 'Mestrado', 'Doutorado', 'Pós-doutorado'])[0],
+            'school_class_id' => $this->faker->numberBetween(1,5),
         ];
     }
 }

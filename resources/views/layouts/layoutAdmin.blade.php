@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="{{ asset ('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset ('plugins/summernote/summernote-bs4.min.css')}}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   @yield('head')
 
@@ -288,6 +290,6 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('js/pages/dashboard.js')}}"></script>
 
-    @yield('script')
+@yield('script')
 </body>
 </html>
