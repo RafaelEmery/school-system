@@ -20,8 +20,8 @@
       <div class="card">
         <div class="card-header">
           <div class="w-100 d-flex justify-content-between align-itens-center">
-            <h3 class="card-title align-middle">Listagem de Alunos</h3>
-            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Cadastrar novo Aluno</button>
+            <h3 class="card-title align-middle">Listagem de Disciplinas</h3>
+            <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Cadastrar nova Disciplina</button>
           </div>
         </div>
         <!-- /.card-header -->
@@ -29,20 +29,16 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Matricula</th>
+                <th>Código</th>
                 <th>Nome</th>
-                <th>Data de Nascimento</th>
-                <th>Turma</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($students as $student)
+              @foreach ($subjects as $subject)
                   <tr>
-                    <td>{{$student->enrollment_number}}</td>
-                    <td>{{$student->name}}</td>
-                    <td>{{ \Carbon\Carbon::parse($student->birthday_date)->format('d/m/Y')}}</td>
-                    <td>{{App\Models\SchoolClass::find($student->school_class_id) -> name}}</td>
+                    <td>{{$subject->id}}</td>
+                    <td>{{$subject->name}}</td>
                     <td>
                       <button class="btn btn-info">Informações</button>
                       <button class="btn btn-warning">Editar</button>
@@ -64,53 +60,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Novo Aluno</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Nova Disciplina</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('aluno.store')}}" id="form-create" method="POST">
+        <form action="{{route('disciplina.store')}}" id="form-create" method="POST">
           @csrf
           <div class="w-100 d-flex flex-column align-itens-center">
             <div class="form-group">
               <label for="">Nome</label>
               <input class="form-control" type="text" name="name" id="">
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label>Tipo de Documento</label>
-                  <select class="form-control" name="document_type">
-                    <option value="1">RG</option>
-                    <option value="2">CPF</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="form-group" style="display: none">
-              <label for="">Matricula</label>
-              <input class="form-control" type="text" value="987655443" name="enrollment_number" id="">
-            </div>
-            <div class="form-group">
-              <label for="">Documento</label>
-              <input class="form-control" type="text" name="document" id="">
-            </div>
-            <div class="form-group">
-              <label for="">Data de Nascimento</label>
-              <input class="form-control" type="date" name="birthday_date" id="">
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label>Classe</label>
-                  <select class="form-control" name="school_class_id">
-                    @foreach ($classes as $class)
-                      <option value="{{$class->id}}">{{$class->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
             </div>
           </div>
         </form>

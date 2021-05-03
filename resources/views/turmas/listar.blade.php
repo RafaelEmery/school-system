@@ -39,8 +39,8 @@
               @foreach ($classes as $class)
                   <tr>
                     <td>{{$class->name}}</td>
-                    <td>{{$class->start_date}}</td>
-                    <td>{{$class->end_date}}</td>
+                    <td>{{ \Carbon\Carbon::parse($class->start_date)->format('d/m/Y')}}</td>
+                    <td>{{ \Carbon\Carbon::parse($class->end_date)->format('d/m/Y')}}</td>
                     <td>
                       <button class="btn btn-info">Informações</button>
                       <button class="btn btn-warning">Editar</button>
@@ -62,7 +62,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cadastrar nova Turma</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
